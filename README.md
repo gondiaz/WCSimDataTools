@@ -1,0 +1,40 @@
+# WCSim Python DataTools
+
+This repository is a Python Package containing tools to process and read the simulation data for the [WCTE experiment](https://wcte.hyperk.ca/).
+
+## Dependencies
+ - python
+ - [ROOT](https://root.cern.ch/)
+ - [WCSim](https://github.com/WCTE/WCSim) \
+        Same ROOT version **must** be used for the compilation of WCSim and the tools provided for this package.
+        The WCSim .root simulation files must have been produced with this particular version.
+
+This package is known to work in the following platforms/software versions:
+- MacOS Ventura 13.2.1
+     - Python 3.10.10 through miniconda 4.9.2
+     - ROOT 6.24/06
+- Rocky Linux release 8.4 (Green Obsidian)
+     - Python 3.7.8
+     - ROOT 5.34/38
+
+## How To
+
+### **install (recomended)**
+1. Clone this repository (`git clone`)
+2. Move to git directory `cd WCSimDataTools`
+3. Use a conda environment: `conda activate env-name`
+4. Install the python package in editable mode `pip install --editable .`\
+    Installing in editable mode will allow you to develop package features.
+5. You can remove the package using `pip uninstall wcsim-hdf5`
+
+### **.root to .hdf5 file conversion**
+After the installation, you can simply run the `root-to-hdf5`. It requires to provide the PyROOT library path and WCSim build containing `libWCSimRoot.dylib`
+
+> `root-to-hdf5 --rootlib /path/to/ROOT-install/lib/ --wcsimlib /path/to/WCSim-build/ /path/to/files/*.root [-o outpath]` 
+
+
+## To Do
+- [ ] Add Pi0 and NCapture data
+- [ ] Add tests
+- [ ] Implement `conda` package
+- [ ] Implement `pandas.DataFrame` reader package on top of `tables` output

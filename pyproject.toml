@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wcsim-hdf5"
+version = "0.0.1"
+authors = [
+    {name = "Gonzalo Díaz López", email = "gdiazlop@lpnhe.in2p3.fr"},
+]
+dependencies = [
+    "numpy",
+    "tables",
+    "uproot"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["conversion*"]
+
+[project.scripts]
+root-to-hdf5 = "conversion.root_to_hdf5:main"
+
