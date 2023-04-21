@@ -32,9 +32,27 @@ After the installation, you can simply run the `root-to-hdf5`. It requires to pr
 
 > `root-to-hdf5 --rootlib /path/to/ROOT-install/lib/ --wcsimlib /path/to/WCSim-build/ /path/to/files/*.root [-o outpath]` 
 
+### **reading .hdf5 files**
+
+The `wcsimreader` package contains the tools to read the WCSim .hdf5 files. You can explore the data in the file by calling
+
+```python 
+from wcsimreader import utils
+utils.explore_file(filename)
+```
+
+To read the files in a `pandas.DataFrame` instance you can use, for example for reading the table **wcsimT/Tracks**
+
+```python 
+from wcsimreader import utils
+utils.read_table(filename, "wcsimT/Tracks")
+```
+
+
 
 ## To Do
 - [ ] Add Pi0 and NCapture data
 - [ ] Add tests
 - [ ] Implement `conda` package
-- [ ] Implement `pandas.DataFrame` reader package on top of `tables` output
+- [ ] Implement event filtering readers
+- [ ] Implement event filtering writers
