@@ -16,7 +16,7 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
-exclude = ["conversion*"]
+exclude = ["conversion/descriptions.py"]
 
 [project.scripts]
 root-to-hdf5 = "conversion.root_to_hdf5:main"
