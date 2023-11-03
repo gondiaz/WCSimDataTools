@@ -3,6 +3,7 @@ import glob
 import argparse
 import numpy  as np
 import tables as tb
+import ROOT
 import uproot
 uproot.default_library = "np"
 
@@ -12,14 +13,11 @@ from os.path       import expandvars, realpath, join
 def main():
 
     parser = argparse.ArgumentParser( prog        = "wcsim_root_to_hdf5"
-                                , description = "Converts WCSim .root files into .hdf5"
-                                , epilog      = "Text at the bottom of help")
-
-    parser.add_argument( "--rootlib", type=str, nargs="?", default = expandvars("$HOME/Software/Root/install/lib")
-                    , help = "ROOT library path")
+                                    , description = "Converts WCSim .root files into .hdf5"
+                                    , epilog      = "Text at the bottom of help")
 
     parser.add_argument( "--wcsimlib", type=str, nargs="?", default = expandvars("$HOME/WCTE/Software/WCSim/build/")
-                    , help = "WCSim library path")
+                       , help = "WCSim library path")
 
     parser.add_argument("-v", "--verbose", action="store_true")
 
@@ -28,8 +26,6 @@ def main():
     
     args = parser.parse_args()
 
-    sys.path.append(args.rootlib)
-    import ROOT
     ROOT.gSystem.AddDynamicPath(args.wcsimlib)
     ROOT.gSystem.Load          ("libWCSimRoot.dylib" if sys.platform == "darwin" else "libWCSimRoot.so")
 
@@ -53,14 +49,9 @@ def main():
         with uproot.open(root_fname) as f:
             table = h5f.create_table("/", "Settings", Settings, "Settings")
             row = table.row
-            row["GitHash"]     = f["Settings/GitHash"    ].array()[0]
-            row["WCDetRadius"] = f["Settings/WCDetRadius"].array()[0]
-            row["WCDetHeight"] = f["Settings/WCDetHeight"].array()[0]
-            row["WCDetCentre"] = f["Settings/WCDetCentre"].array()[0]
-            row["WCXRotation"] = f["Settings/WCXRotation"].array()[0]
-            row["WCYRotation"] = f["Settings/WCYRotation"].array()[0]
-            row["WCZRotation"] = f["Settings/WCZRotation"].array()[0]
-            row.append()
+            for key in f["Settings"].keys():
+                row[key] = f[f"Settings/{key}"    ].array()[0]
+                row.append()
             table.flush()
 
 
@@ -255,17 +246,19 @@ def main():
         tree.GetEvent(0)
         options = tree.wcsimrootoptions
 
+        pmttag = "tank" #TODO: review this parameter
+
         row = options_table.row
         row["DetectorName"]                  = options.GetDetectorName()
         row["SavePi0"]                       = options.GetSavePi0()
         row["PMTQEMethod"]                   = options.GetPMTQEMethod()
         row["PMTCollEff"]                    = options.GetPMTCollEff()
-        row["PMTDarkRate"]                   = options.GetPMTDarkRate()
-        row["ConvRate"]                      = options.GetConvRate()
-        row["DarkHigh"]                      = options.GetDarkHigh()
-        row["DarkLow"]                       = options.GetDarkLow()
-        row["DarkWindow"]                    = options.GetDarkWindow()
-        row["DarkMode"]                      = options.GetDarkMode()
+        row["PMTDarkRate"]                   = options.GetPMTDarkRate(pmttag)
+        row["ConvRate"]                      = options.GetConvRate   (pmttag)
+        row["DarkHigh"]                      = options.GetDarkHigh   (pmttag)
+        row["DarkLow"]                       = options.GetDarkLow    (pmttag)
+        row["DarkWindow"]                    = options.GetDarkWindow (pmttag)
+        row["DarkMode"]                      = options.GetDarkMode   (pmttag)
         row["DigitizerClassName"]            = options.GetDigitizerClassName()
         row["DigitizerDeadTime"]             = options.GetDigitizerDeadTime()
         row["DigitizerIntegrationWindow"]    = options.GetDigitizerIntegrationWindow()
