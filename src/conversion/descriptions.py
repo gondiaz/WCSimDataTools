@@ -109,10 +109,10 @@ class CherenkovDigiHits(tb.IsDescription):
 
     dhit           = tb.Int64Col  (pos=4)
     Q              = tb.Float64Col(pos=5)
-    T              = tb.Int64Col  (pos=6)
-    TubeID         = tb.Float64Col(pos=7)
-    mPMTID         = tb.Float64Col(pos=8)
-    mPMT_PMTID     = tb.Float64Col(pos=9)
+    T              = tb.Float64Col(pos=6)
+    TubeID         = tb.Int64Col  (pos=7)
+    mPMTID         = tb.Int64Col  (pos=8)
+    mPMT_PMTID     = tb.Int64Col  (pos=9)
 
 
 class Geometry(tb.IsDescription):
