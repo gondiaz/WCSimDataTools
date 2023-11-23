@@ -50,8 +50,8 @@ def main():
             table = h5f.create_table("/", "Settings", Settings, "Settings")
             row = table.row
             for key in f["Settings"].keys():
-                row[key] = f[f"Settings/{key}"    ].array()[0]
-                row.append()
+                row[key] = f[f"Settings/{key}"].array()[0]
+            row.append()
             table.flush()
 
 
