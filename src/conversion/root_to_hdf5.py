@@ -103,6 +103,7 @@ def main():
         photonids_arr = h5f.create_vlarray( dhits_group,         "PhotonIDs",    tb.Int64Atom(), "PhotonIDs")
 
         tree  = rootf.GetKey("wcsimT").ReadObj()
+        tree.GetBranch("wcsimrootevent").SetAutoDelete(True)
         nevents = tree.GetEntries()
         if args.verbose: print("Number of events:",  nevents)
 
