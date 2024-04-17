@@ -47,12 +47,15 @@ def main():
         #     Settings
         # ----------------
         with uproot.open(root_fname) as f:
-            table = h5f.create_table("/", "Settings", Settings, "Settings")
-            row = table.row
-            for key in f["Settings"].keys():
-                row[key] = f[f"Settings/{key}"].array()[0]
-            row.append()
-            table.flush()
+            if "Settings" in f.keys():
+                table = h5f.create_table("/", "Settings", Settings, "Settings")
+                row = table.row
+                for key in f["Settings"].keys():
+                    row[key] = f[f"Settings/{key}"].array()[0]
+                row.append()
+                table.flush()
+            else:
+                print(f"No Settings TTree in given file: skipping")
 
 
         # ----------------
