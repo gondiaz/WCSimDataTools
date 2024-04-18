@@ -14,7 +14,7 @@ jobs:
       with:
         activate-environment: wcsimdatatools
         miniconda-version: "latest"
-        environment-file: env.yml
+        environment-file: env.yaml
         python-version: 3.10
         auto-activate-base: false
     - shell: bash -l {0}
