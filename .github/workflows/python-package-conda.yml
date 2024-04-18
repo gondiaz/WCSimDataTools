@@ -13,7 +13,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: wcsimdatatools
-        miniconda-version: "latest"
+#        miniconda-version: "latest"
         environment-file: env.yaml
         python-version: 3.8
         auto-activate-base: false
