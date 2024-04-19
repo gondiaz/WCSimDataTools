@@ -7,9 +7,9 @@ jobs:
     runs-on: self-hosted
     strategy:
       max-parallel: 5
-    defaults:
-      run:
-        shell: bash -el {0}
+#    defaults:
+#      run:
+#        shell: bash -el {0}
 
     steps:
     - uses: actions/checkout@v3
@@ -22,7 +22,6 @@ jobs:
         auto-activate-base: false
         remove-profiles: false # very important to avoid profiles deletion
     - run: |
-        conda activate wcsimdatatools
         conda info
         conda list
 #    - name: Lint with flake8
@@ -34,7 +33,6 @@ jobs:
 #        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Install package
       run: |
-        conda activate wcsimdatatools
         pip install .
 
   test-linux:
