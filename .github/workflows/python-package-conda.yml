@@ -20,6 +20,7 @@ jobs:
         environment-file: env.yaml
         python-version: 3.10.3
         auto-activate-base: false
+        remove-profiles: false # very important to avoid profiles deletion
     - run: |
         conda info
         conda list
