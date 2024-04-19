@@ -31,3 +31,10 @@ jobs:
     - name: Install package
       run: |
         pip install .
+
+  test-linux:
+    needs: build-linux
+    runs-on: self-hosted
+    steps:
+      - run: |
+          python -m unittest discover -s ./tests  -p 'test_*.py'
