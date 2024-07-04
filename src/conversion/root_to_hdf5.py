@@ -47,7 +47,7 @@ def main():
         #     Settings
         # ----------------
         with uproot.open(root_fname) as f:
-            if "Settings" in f.keys():
+            if f.get("Settings"):
                 table = h5f.create_table("/", "Settings", Settings, "Settings")
                 row = table.row
                 for key in f["Settings"].keys():
