@@ -41,7 +41,7 @@ def main():
         rootf = ROOT.TFile(root_fname, "read")
 
         hdf5_fname = join(hdf5_outpath, root_fname.split("/")[-1].split(".root")[0] + ".h5")
-        h5f = tb.open_file(hdf5_fname, mode="w", title="wcsim")
+        h5f = tb.open_file(hdf5_fname, mode="w", title="wcsim", filters=tb.Filters(complevel=5, complib="zlib"))
 
         # ----------------
         #     Settings
