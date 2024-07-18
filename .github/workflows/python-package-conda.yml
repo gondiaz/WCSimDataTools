@@ -1,6 +1,10 @@
 name: Python Package using Conda
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   build-linux:
@@ -42,6 +46,18 @@ jobs:
     needs: build-linux
     runs-on: self-hosted
     steps:
-      - run: |
+      - name: Get test files
+        run: |
+          wget https://github.com/gondiaz/WCSimDataTools/releases/download/CI_release/Archive.zip
+          unzip Archive.zip
+        shell: bash -l {0}
+      - name: Python unittest
+        run: |
           python -m unittest discover -s ./tests  -p 'test_*.py'
         shell: bash -l {0}
+      - name: Upload csv files
+        uses: actions/upload-artifact@v4
+        with:
+          name: csv_files
+          path: |
+            *.csv

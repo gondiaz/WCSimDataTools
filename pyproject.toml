@@ -20,4 +20,5 @@ exclude = ["conversion/descriptions.py"]
 
 [project.scripts]
 root-to-hdf5 = "conversion.root_to_hdf5:main"
+hdf5-to-csv = "conversion.hdf5_to_csv:main"
 
