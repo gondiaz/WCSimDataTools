@@ -13,7 +13,8 @@ list_keys = [
                 "wcsimT/CherenkovHitTimes",
                 "wcsimT/CherenkovHits",
                 "wcsimT/Tracks",
-                "wcsimT/Triggers"
+                "wcsimT/Triggers",
+                "/wcsimT/CherenkovDigiHits/DigiHits"
              ]
 
 def main():
