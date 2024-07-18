@@ -43,5 +43,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: |
+          wget https://github.com/gondiaz/WCSimDataTools/releases/download/CI_release/Archive.zip
+          unzip Archive.zip
+#          rm Archive.zip out_mu-_500_0.h5
           python -m unittest discover -s ./tests  -p 'test_*.py'
         shell: bash -l {0}
+      - name: Upload csv files
+        uses: actions/upload-artifact@v4
+        with:
+          name: csv_files
+          path: |
+            *.csv
