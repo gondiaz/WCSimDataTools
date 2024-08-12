@@ -178,8 +178,10 @@ def main():
                     for i in range(3): row[f"Start_x{i}"] = t.GetStart(i)
                     for i in range(3): row[ f"Stop_x{i}"] = t.GetStop (i)
                     row["Parenttype"] = t.GetParenttype()
+                    row["CreatorProcess"] = t.GetCreatorProcess()
                     row["Time"]       = t.GetTime()
                     row["Id"]         = t.GetId()
+                    row["ParentId"]         = t.GetParentId()
                     row.append()
                 tracks_table.flush()
 
