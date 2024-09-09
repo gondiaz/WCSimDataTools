@@ -7,7 +7,8 @@ This repository is a Python Package containing tools to process and read the sim
  - [ROOT](https://root.cern.ch/)
  - [WCSim](https://github.com/WCTE/WCSim) \
         Same ROOT version **must** be used for the compilation of WCSim and the tools provided for this package.
-        The WCSim .root simulation files must have been produced with this particular version.
+        The WCSim .root simulation files must have been produced with this particular version.\
+        Technically one just needs the [WCSimRoot](https://github.com/WCSim/WCSim?tab=readme-ov-file#wcsim-cmake-build-options) library from WCSim to read the data files. 
 
 This package is known to work in the following platforms/software versions:
 - MacOS Ventura 13.2.1
