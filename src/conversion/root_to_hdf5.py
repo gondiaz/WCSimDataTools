@@ -7,7 +7,7 @@ import ROOT
 import uproot
 uproot.default_library = "np"
 
-from descriptions import *
+from .descriptions import *
 from os.path       import expandvars, realpath, join
 
 def main():
